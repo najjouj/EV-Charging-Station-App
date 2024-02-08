@@ -12,6 +12,7 @@ import * as SecureStore from "expo-secure-store";
 import { NavigationContainer } from '@react-navigation/native';
 import TabNavigation from './App/Navigations/TabNavigation';
 import * as Location from 'expo-location';
+import { UserLocationContext } from './App/Context/UserLocationContext';
 
 
 
@@ -57,8 +58,8 @@ export default function App() {
       }
 
       let location = await Location.getCurrentPositionAsync({});
-      setLocation(location);
-      console.log(location);
+      setLocation(location.coords);
+      console.log(location.coords);
     })();
   }, []);
 
@@ -85,8 +86,8 @@ export default function App() {
     <ClerkProvider 
     tokenCache={tokenCache}
     publishableKey={'pk_test_a25vd2luZy1nYW5uZXQtMzYuY2xlcmsuYWNjb3VudHMuZGV2JA'}  >
-      
-    
+      <UserLocationContext.Provider value={{location,setLocation}}>
+     
     <SignedIn>
      
          <TabNavigation/>
@@ -97,8 +98,9 @@ export default function App() {
         </SignedOut>
       
       {/* <StatusBar style='auto'/> */}
-   
+      </UserLocationContext.Provider>
     </ClerkProvider>
+   
      </NavigationContainer>
   );
 }
