@@ -25,6 +25,13 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "plugins": [
+      "expo-font",
+      "expo-location",
+      {
+        "locationAlwaysAndWhenInUsePermission": "Allow EV Station to use your location."
+      }
+    ]
   }
 }
